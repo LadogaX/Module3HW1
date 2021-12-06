@@ -6,7 +6,7 @@ using Module3HW1.Helpers;
 
 namespace Module3HW1
 {
-   public class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -30,10 +30,10 @@ namespace Module3HW1
 
             var result = customList2.RemoveAt(3);
 
-            result = customList2.Remove(delegate(Product product) { return product.Name.CompareTo("Tomato") == 0; });
+            result = customList2.Remove(p => p.Name.CompareTo("Tomato") == 0);
             customList2.Trim();
 
             CustomListHelpers.Display(customList2, "State after remove:");
         }
-    }
+}
 }

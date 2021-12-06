@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Module3HW1.Models;
+using Module3HW1.Services.Abstractions;
 using Module3HW1.Services.Comparers;
 
 namespace Module3HW1
 {
-    public class CustomList<T> : IEnumerable
+    public class CustomList<T> : ICustomList<T>
     {
         private T[] _array;
         private int _capacity;
@@ -17,7 +18,7 @@ namespace Module3HW1
             _array = new T[capacity];
         }
 
-        public int Count { get; private set; }
+        public int Count { get; set; }
 
         public int Capacity
         {
@@ -114,6 +115,18 @@ namespace Module3HW1
         public bool Remove(Predicate<T> predicate)
         {
             var index = Array.FindIndex<T>(_array,  0, predicate);
+
+            if (index < 0)
+            {
+                return false;
+            }
+
+            return RemoveAt(index);
+        }
+
+        public bool Remove(T item)
+        {
+            var index = Array.IndexOf<T>(_array, item);
 
             if (index < 0)
             {
